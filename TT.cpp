@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include <thread>
 #include <string>
+#include <conio.h>
 #undef max
 using namespace std;
 
@@ -80,14 +81,14 @@ void easy(mt19937 &mt19937RndEngine) {
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键。" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "输入正确！用时: " << duration << " 秒。" << endl;
             cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
             break;
         }
@@ -103,14 +104,14 @@ void upgrade(mt19937& mt19937RndEngine) {
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键。" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "输入正确！用时: " << duration << " 秒。" << endl;
             cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
             break;
         }
@@ -126,14 +127,14 @@ void normal(mt19937& mt19937RndEngine) {
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键。" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "输入正确！用时: " << duration << " 秒。" << endl;
             cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
             break;
         }
@@ -150,14 +151,14 @@ void advanced(mt19937& mt19937RndEngine) {
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键。" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "输入正确！用时: " << duration << " 秒。" << endl;
             cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
             break;
         }
@@ -174,14 +175,14 @@ void hardcore(mt19937& mt19937RndEngine) {
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键。" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "输入正确！用时: " << duration << " 秒。" << endl;
             cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
             break;
         }
@@ -194,10 +195,11 @@ int main()
     unsigned int seed = rd();
     mt19937 hRndEngine(seed);
     size_t oprt = 0;
+    char kbdInput = 'A';
     while (true) {
         cout << "打字测试V1.0 BY DEEPSLEEP-V3（包含21字，36字....）" << endl;
-        cout << "1，简单\n2，还行（默认）\n3，普通\n4，进阶\n5，硬核\n6，退出\n请输入你的选択：[ ]\n";
-        gotoxy(17, 7);
+        cout << "1，简单\n2，还行（默认）\n3，普通\n4，进阶\n5，硬核\n6，帮助\n,7，退出\n请输入你的选択：[ ]\n";
+        gotoxy(17, 8);
         cin >> oprt;
         clrscr();
         this_thread::sleep_for(chrono::seconds(1));
@@ -226,6 +228,17 @@ int main()
             hardcore(hRndEngine);
             break;
         case 6:
+            clrscr();
+            cout << "[esc] 退出帮助系统" << endl;
+            cout << "[ 1 ] 玩法" << endl;
+            while (1) {
+                if (_kbhit()) {
+                    kbdInput = _getch();
+                    if (kbdInput == 27 || kbdInput == '1') { break; }
+                }
+            }
+            break;
+        case 7:
             return 0;
         default:
             cout << "你的选択无效，倒计时后，将执行默认选项（2，还行）" << endl;
@@ -240,7 +253,7 @@ int main()
             clrscr();
             upgrade(hRndEngine);
         }
-        cout << "如果要开始下一局，按下任意键." << endl;
+        cout << "如果要开始下一局，按下任意键。" << endl;
         system("pause");
         clrscr();
     }
