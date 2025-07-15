@@ -71,105 +71,120 @@ string generateRandomString(mt19937& engine, size_t length) {
 }
 
 void easy(mt19937 &mt19937RndEngine) {
-    string input = "";
-    string sz = generateRandomString(mt19937RndEngine, 21);
-    cout << "请打出“" << sz << "”." << endl;
-    auto startTime = chrono::high_resolution_clock::now();
-    cin >> input;
-    auto endTime = chrono::high_resolution_clock::now();
-    double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
-    if (input != sz) {
-        cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getchar();
-        clrscr();
-        easy(mt19937RndEngine);
-    }
-    else {
-        cout << "输入正确！用时: " << duration << " 秒." << endl;
-        cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+    while (true) {
+        string input = "";
+        string sz = generateRandomString(mt19937RndEngine, 21);
+        cout << "请打出“" << sz << "”." << endl;
+        auto startTime = chrono::high_resolution_clock::now();
+        cin >> input;
+        auto endTime = chrono::high_resolution_clock::now();
+        double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
+        if (input != sz) {
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getchar();
+            clrscr();
+            continue;
+        }
+        else {
+            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+            break;
+        }
     }
 }
 void upgrade(mt19937& mt19937RndEngine) {
-    string input = "";
-    string sz = generateRandomString(mt19937RndEngine, 36);
-    cout << "请打出“" << sz << "”." << endl;
-    auto startTime = chrono::high_resolution_clock::now();
-    cin >> input;
-    auto endTime = chrono::high_resolution_clock::now();
-    double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
-    if (input != sz) {
-        cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getchar();
-        clrscr();
-        upgrade(mt19937RndEngine);
-    }
-    else {
-        cout << "输入正确！用时: " << duration << " 秒." << endl;
-        cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+    while (true) {
+        string input = "";
+        string sz = generateRandomString(mt19937RndEngine, 36);
+        cout << "请打出“" << sz << "”." << endl;
+        auto startTime = chrono::high_resolution_clock::now();
+        cin >> input;
+        auto endTime = chrono::high_resolution_clock::now();
+        double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
+        if (input != sz) {
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getchar();
+            clrscr();
+            continue;
+        }
+        else {
+            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+            break;
+        }
     }
 }
 void normal(mt19937& mt19937RndEngine) {
-    string input = "";
-    string sz = generateRandomString(mt19937RndEngine, 50);
-    cout << "请打出“" << sz << "”." << endl;
-    auto startTime = chrono::high_resolution_clock::now();
-    cin >> input;
-    auto endTime = chrono::high_resolution_clock::now();
-    double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
-    if (input != sz) {
-        cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getchar();
-        clrscr();
-        normal(mt19937RndEngine);
-    }
-    else {
-        cout << "输入正确！用时: " << duration << " 秒." << endl;
-        cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+    while (true) {
+        string input = "";
+        string sz = generateRandomString(mt19937RndEngine, 50);
+        cout << "请打出“" << sz << "”." << endl;
+        auto startTime = chrono::high_resolution_clock::now();
+        cin >> input;
+        auto endTime = chrono::high_resolution_clock::now();
+        double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
+        if (input != sz) {
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getchar();
+            clrscr();
+            continue;
+        }
+        else {
+            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+            break;
+        }
     }
 }
 
 void advanced(mt19937& mt19937RndEngine) {
-    string input = "";
-    string sz = generateRandomString(mt19937RndEngine, 67);
-    cout << "请打出“" << sz << "”." << endl;
-    auto startTime = chrono::high_resolution_clock::now();
-    cin >> input;
-    auto endTime = chrono::high_resolution_clock::now();
-    double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
-    if (input != sz) {
-        cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getchar();
-        clrscr();
-        advanced(mt19937RndEngine);
-    }
-    else {
-        cout << "输入正确！用时: " << duration << " 秒." << endl;
-        cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+    while (true) {
+        string input = "";
+        string sz = generateRandomString(mt19937RndEngine, 67);
+        cout << "请打出“" << sz << "”." << endl;
+        auto startTime = chrono::high_resolution_clock::now();
+        cin >> input;
+        auto endTime = chrono::high_resolution_clock::now();
+        double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
+        if (input != sz) {
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getchar();
+            clrscr();
+            continue;
+        }
+        else {
+            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+            break;
+        }
     }
 }
 
 void hardcore(mt19937& mt19937RndEngine) {
-    string input = "";
-    string sz = generateRandomString(mt19937RndEngine, 99);
-    cout << "请打出“" << sz << "”." << endl;
-    auto startTime = chrono::high_resolution_clock::now();
-    cin >> input;
-    auto endTime = chrono::high_resolution_clock::now();
-    double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
-    if (input != sz) {
-        cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getchar();
-        clrscr();
-        hardcore(mt19937RndEngine);
-    }
-    else {
-        cout << "输入正确！用时: " << duration << " 秒." << endl;
-        cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+    while (true) {
+        string input = "";
+        string sz = generateRandomString(mt19937RndEngine, 99);
+        cout << "请打出“" << sz << "”." << endl;
+        auto startTime = chrono::high_resolution_clock::now();
+        cin >> input;
+        auto endTime = chrono::high_resolution_clock::now();
+        double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
+        if (input != sz) {
+            cout << "你好像打错了，检查一下吧，如果检查好了，按任意字母或数字键." << endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getchar();
+            clrscr();
+            continue;
+        }
+        else {
+            cout << "输入正确！用时: " << duration << " 秒." << endl;
+            cout << "平均每个字符用时：" << duration / sz.length() << "秒" << endl;
+            break;
+        }
     }
 }
 
