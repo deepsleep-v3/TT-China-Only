@@ -1,4 +1,8 @@
-ï»¿#include <type_traits>
+// TT.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+//
+
+#include "stdafx.h"
+#include <type_traits>
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -14,13 +18,13 @@ using namespace std;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 template <typename _Ty>
-requires is_arithmetic_v<_Ty>
 class Range {
 private:
     _Ty m_begin;
     _Ty m_end;
 public:
-    Range(int32_t begin, int32_t end) {
+    Range(int begin, int end) {
+		static_assert(is_arithmetic<_Ty>::value, "·ºĞÍµÄÀàĞÍ¡°_Ty¡±±ØĞëÊÇËãÊıÀàĞÍ¡£");
         m_begin = begin;
         m_end = end;
     }
@@ -58,15 +62,15 @@ void clrscr() {
 }
 
 string generateRandomString(mt19937& engine, size_t length) {
-    // å­—ç¬¦é›†ï¼šå¤§å°å†™å­—æ¯ï¼ˆå…±52ä¸ªï¼‰
+    // ×Ö·û¼¯£º´óĞ¡Ğ´×ÖÄ¸£¨¹²52¸ö£©
     vector<char> all_letters = Range<char>(65, 122).toVector();
-    // éšæœºåˆ†å¸ƒï¼šä»0åˆ°charset.size()-1
+    // Ëæ»ú·Ö²¼£º´Ó0µ½charset.size()-1
     uniform_int_distribution<size_t> dist(0, all_letters.size() - 1);
 
     string result;
-    result.reserve(length); // é¢„åˆ†é…ç©ºé—´
+    result.reserve(length); // Ô¤·ÖÅä¿Õ¼ä
     for (size_t i = 0; i < length; ++i) {
-        result += all_letters[dist(engine)]; // éšæœºé€‰æ‹©å­—ç¬¦ï¼ˆå…è®¸é‡å¤ï¼‰
+        result += all_letters[dist(engine)]; // Ëæ»úÑ¡Ôñ×Ö·û£¨ÔÊĞíÖØ¸´£©
     }
     return result;
 }
@@ -75,21 +79,21 @@ void easy(mt19937 &mt19937RndEngine) {
     while (true) {
         string input = "";
         string sz = generateRandomString(mt19937RndEngine, 21);
-        cout << "è¯·æ‰“å‡ºâ€œ" << sz << "â€." << endl;
+        cout << "Çë´ò³ö¡°" << sz << "¡±." << endl;
         auto startTime = chrono::high_resolution_clock::now();
         cin >> input;
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "ä½ å¥½åƒæ‰“é”™äº†ï¼Œæ£€æŸ¥ä¸€ä¸‹å§ï¼Œå¦‚æœæ£€æŸ¥å¥½äº†ï¼ŒæŒ‰ä»»æ„å­—æ¯æˆ–æ•°å­—é”®ã€‚" << endl;
+            cout << "ÄãºÃÏñ´ò´íÁË£¬¼ì²éÒ»ÏÂ°É£¬Èç¹û¼ì²éºÃÁË£¬°´ÈÎÒâ×ÖÄ¸»òÊı×Ö¼ü¡£" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "è¾“å…¥æ­£ç¡®ï¼ç”¨æ—¶: " << duration << " ç§’ã€‚" << endl;
-            cout << "å¹³å‡æ¯ä¸ªå­—ç¬¦ç”¨æ—¶ï¼š" << duration / sz.length() << "ç§’" << endl;
+            cout << "ÊäÈëÕıÈ·£¡ÓÃÊ±: " << duration << " Ãë¡£" << endl;
+            cout << "Æ½¾ùÃ¿¸ö×Ö·ûÓÃÊ±£º" << duration / sz.length() << "Ãë" << endl;
             break;
         }
     }
@@ -98,21 +102,21 @@ void upgrade(mt19937& mt19937RndEngine) {
     while (true) {
         string input = "";
         string sz = generateRandomString(mt19937RndEngine, 36);
-        cout << "è¯·æ‰“å‡ºâ€œ" << sz << "â€." << endl;
+        cout << "Çë´ò³ö¡°" << sz << "¡±." << endl;
         auto startTime = chrono::high_resolution_clock::now();
         cin >> input;
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "ä½ å¥½åƒæ‰“é”™äº†ï¼Œæ£€æŸ¥ä¸€ä¸‹å§ï¼Œå¦‚æœæ£€æŸ¥å¥½äº†ï¼ŒæŒ‰ä»»æ„å­—æ¯æˆ–æ•°å­—é”®ã€‚" << endl;
+            cout << "ÄãºÃÏñ´ò´íÁË£¬¼ì²éÒ»ÏÂ°É£¬Èç¹û¼ì²éºÃÁË£¬°´ÈÎÒâ×ÖÄ¸»òÊı×Ö¼ü¡£" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "è¾“å…¥æ­£ç¡®ï¼ç”¨æ—¶: " << duration << " ç§’ã€‚" << endl;
-            cout << "å¹³å‡æ¯ä¸ªå­—ç¬¦ç”¨æ—¶ï¼š" << duration / sz.length() << "ç§’" << endl;
+            cout << "ÊäÈëÕıÈ·£¡ÓÃÊ±: " << duration << " Ãë¡£" << endl;
+            cout << "Æ½¾ùÃ¿¸ö×Ö·ûÓÃÊ±£º" << duration / sz.length() << "Ãë" << endl;
             break;
         }
     }
@@ -121,21 +125,21 @@ void normal(mt19937& mt19937RndEngine) {
     while (true) {
         string input = "";
         string sz = generateRandomString(mt19937RndEngine, 50);
-        cout << "è¯·æ‰“å‡ºâ€œ" << sz << "â€." << endl;
+        cout << "Çë´ò³ö¡°" << sz << "¡±." << endl;
         auto startTime = chrono::high_resolution_clock::now();
         cin >> input;
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "ä½ å¥½åƒæ‰“é”™äº†ï¼Œæ£€æŸ¥ä¸€ä¸‹å§ï¼Œå¦‚æœæ£€æŸ¥å¥½äº†ï¼ŒæŒ‰ä»»æ„å­—æ¯æˆ–æ•°å­—é”®ã€‚" << endl;
+            cout << "ÄãºÃÏñ´ò´íÁË£¬¼ì²éÒ»ÏÂ°É£¬Èç¹û¼ì²éºÃÁË£¬°´ÈÎÒâ×ÖÄ¸»òÊı×Ö¼ü¡£" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "è¾“å…¥æ­£ç¡®ï¼ç”¨æ—¶: " << duration << " ç§’ã€‚" << endl;
-            cout << "å¹³å‡æ¯ä¸ªå­—ç¬¦ç”¨æ—¶ï¼š" << duration / sz.length() << "ç§’" << endl;
+            cout << "ÊäÈëÕıÈ·£¡ÓÃÊ±: " << duration << " Ãë¡£" << endl;
+            cout << "Æ½¾ùÃ¿¸ö×Ö·ûÓÃÊ±£º" << duration / sz.length() << "Ãë" << endl;
             break;
         }
     }
@@ -145,21 +149,21 @@ void advanced(mt19937& mt19937RndEngine) {
     while (true) {
         string input = "";
         string sz = generateRandomString(mt19937RndEngine, 67);
-        cout << "è¯·æ‰“å‡ºâ€œ" << sz << "â€." << endl;
+        cout << "Çë´ò³ö¡°" << sz << "¡±." << endl;
         auto startTime = chrono::high_resolution_clock::now();
         cin >> input;
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "ä½ å¥½åƒæ‰“é”™äº†ï¼Œæ£€æŸ¥ä¸€ä¸‹å§ï¼Œå¦‚æœæ£€æŸ¥å¥½äº†ï¼ŒæŒ‰ä»»æ„å­—æ¯æˆ–æ•°å­—é”®ã€‚" << endl;
+            cout << "ÄãºÃÏñ´ò´íÁË£¬¼ì²éÒ»ÏÂ°É£¬Èç¹û¼ì²éºÃÁË£¬°´ÈÎÒâ×ÖÄ¸»òÊı×Ö¼ü¡£" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "è¾“å…¥æ­£ç¡®ï¼ç”¨æ—¶: " << duration << " ç§’ã€‚" << endl;
-            cout << "å¹³å‡æ¯ä¸ªå­—ç¬¦ç”¨æ—¶ï¼š" << duration / sz.length() << "ç§’" << endl;
+            cout << "ÊäÈëÕıÈ·£¡ÓÃÊ±: " << duration << " Ãë¡£" << endl;
+            cout << "Æ½¾ùÃ¿¸ö×Ö·ûÓÃÊ±£º" << duration / sz.length() << "Ãë" << endl;
             break;
         }
     }
@@ -169,21 +173,21 @@ void hardcore(mt19937& mt19937RndEngine) {
     while (true) {
         string input = "";
         string sz = generateRandomString(mt19937RndEngine, 99);
-        cout << "è¯·æ‰“å‡ºâ€œ" << sz << "â€." << endl;
+        cout << "Çë´ò³ö¡°" << sz << "¡±." << endl;
         auto startTime = chrono::high_resolution_clock::now();
         cin >> input;
         auto endTime = chrono::high_resolution_clock::now();
         double duration = chrono::duration_cast<chrono::duration<double>>(endTime - startTime).count();
         if (input != sz) {
-            cout << "ä½ å¥½åƒæ‰“é”™äº†ï¼Œæ£€æŸ¥ä¸€ä¸‹å§ï¼Œå¦‚æœæ£€æŸ¥å¥½äº†ï¼ŒæŒ‰ä»»æ„å­—æ¯æˆ–æ•°å­—é”®ã€‚" << endl;
+            cout << "ÄãºÃÏñ´ò´íÁË£¬¼ì²éÒ»ÏÂ°É£¬Èç¹û¼ì²éºÃÁË£¬°´ÈÎÒâ×ÖÄ¸»òÊı×Ö¼ü¡£" << endl;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getchar();
             clrscr();
             continue;
         }
         else {
-            cout << "è¾“å…¥æ­£ç¡®ï¼ç”¨æ—¶: " << duration << " ç§’ã€‚" << endl;
-            cout << "å¹³å‡æ¯ä¸ªå­—ç¬¦ç”¨æ—¶ï¼š" << duration / sz.length() << "ç§’" << endl;
+            cout << "ÊäÈëÕıÈ·£¡ÓÃÊ±: " << duration << " Ãë¡£" << endl;
+            cout << "Æ½¾ùÃ¿¸ö×Ö·ûÓÃÊ±£º" << duration / sz.length() << "Ãë" << endl;
             break;
         }
     }
@@ -196,9 +200,10 @@ int main()
     mt19937 hRndEngine(seed);
     size_t oprt = 0;
     char kbdInput = 'A';
+	string _ = "";
     while (true) {
-        cout << "æ‰“å­—æµ‹è¯•V1.0 BY DEEPSLEEP-V3ï¼ˆåŒ…å«21å­—ï¼Œ36å­—....ï¼‰" << endl;
-        cout << "1ï¼Œç®€å•\n2ï¼Œè¿˜è¡Œï¼ˆé»˜è®¤ï¼‰\n3ï¼Œæ™®é€š\n4ï¼Œè¿›é˜¶\n5ï¼Œç¡¬æ ¸\n6ï¼Œå¸®åŠ©\n,7ï¼Œé€€å‡º\nè¯·è¾“å…¥ä½ çš„é€‰æŠï¼š[ ]\n";
+        cout << "´ò×Ö²âÊÔV1.0 BY DEEPSLEEP-V3£¨°üº¬21×Ö£¬36×Ö....£©" << endl;
+        cout << "1£¬¼òµ¥\n2£¬»¹ĞĞ£¨Ä¬ÈÏ£©\n3£¬ÆÕÍ¨\n4£¬½ø½×\n5£¬Ó²ºË\n6£¬°ïÖú\n7£¬ÍË³ö\nÇëÊäÈëÄãµÄÑ¡’k£º[ ]\n";
         gotoxy(17, 8);
         cin >> oprt;
         clrscr();
@@ -229,19 +234,37 @@ int main()
             break;
         case 6:
             clrscr();
-            cout << "[esc] é€€å‡ºå¸®åŠ©ç³»ç»Ÿ" << endl;
-            cout << "[ 1 ] ç©æ³•" << endl;
+            cout << "[esc] ÍË³ö°ïÖúÏµÍ³" << endl;
+            cout << "[ 1 ] Íæ·¨" << endl;
             while (1) {
                 if (_kbhit()) {
                     kbdInput = _getch();
                     if (kbdInput == 27 || kbdInput == '1') { break; }
                 }
             }
+			switch(kbdInput){
+			case 27:
+				clrscr();
+				continue;
+			case '1':
+				clrscr();
+				cout << "Äã¿ÉÒÔÍ¨¹ıÖ÷½çÃæÑ¡ÔñÄÑ¶È£¬µ¹¼ÆÊ±ºó£¬±¾Èí¼ş½«»áÉú³ÉÒ»¸öËæ»ú×Ö·û´®£¨ASCII 65ÖÁ122£©¡£" << endl;
+				cout << "ÄãĞèÒªÒ»×Ö²»Îó£¨ÇÒÇø·Ö´óĞ¡Ğ´£¬ÒÔºó¿ÉÄÜ»áÊÇÑ¡ÏîÊ½£©´ò³öÕâ¸ö×Ö·û´®£¬µ±È»£¬Ò²²»ÊÇËµ´ò´íÁË¾ÍÃ»ÓĞ»ú»áÁË£¬ÔÚÄã´ò´íºó£¬³ÌĞò»áµ¯³öÒ»¶ÎÌáÊ¾£¬¿ÉÒÔÈÃÄã¼ì²é£¬¼ì²é¹ıºó£¬Äã¿ÉÒÔ°´ÏÂ¼üÅÌÉÏµÄÒ»¸ö×Ö·û£¬¿ÉÒÔÔÙÊÔÒ»´Î¡£" << endl;
+				cout << "°´ÏÂ¡°»Ø³µ¡±¼ÌĞø...." << endl;
+				while (1) {
+                    if (_kbhit()) {
+                        kbdInput = _getch();
+                        if (kbdInput == '\r') { break; }
+                    }
+                }
+				clrscr();
+				continue;
+			}
             break;
         case 7:
             return 0;
         default:
-            cout << "ä½ çš„é€‰æŠæ— æ•ˆï¼Œå€’è®¡æ—¶åï¼Œå°†æ‰§è¡Œé»˜è®¤é€‰é¡¹ï¼ˆ2ï¼Œè¿˜è¡Œï¼‰" << endl;
+            cout << "ÄãµÄÑ¡’kÎŞĞ§£¬µ¹¼ÆÊ±ºó£¬½«Ö´ĞĞÄ¬ÈÏÑ¡Ïî£¨2£¬»¹ĞĞ£©" << endl;
             this_thread::sleep_for(chrono::milliseconds(2500));
             clrscr();
             cout << "3...." << endl;
@@ -253,8 +276,10 @@ int main()
             clrscr();
             upgrade(hRndEngine);
         }
-        cout << "å¦‚æœè¦å¼€å§‹ä¸‹ä¸€å±€ï¼ŒæŒ‰ä¸‹ä»»æ„é”®ã€‚" << endl;
+        cout << "Èç¹ûÒª¿ªÊ¼ÏÂÒ»¾Ö£¬°´ÏÂÈÎÒâ¼ü¡£" << endl;
         system("pause");
         clrscr();
     }
 }
+
+
