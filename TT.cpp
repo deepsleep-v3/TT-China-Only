@@ -12,6 +12,7 @@
 #include <thread>
 #include <string>
 #include <conio.h>
+#include "bgm.h"
 #undef max
 using namespace std;
 
@@ -203,8 +204,8 @@ int main()
 	string _ = "";
     while (true) {
         cout << "打字测试V1.0 BY DEEPSLEEP-V3（包含21字，36字....）" << endl;
-        cout << "1，简单\n2，还行（默认）\n3，普通\n4，进阶\n5，硬核\n6，帮助\n7，退出\n请输入你的选択：[ ]\n";
-        gotoxy(17, 8);
+        cout << "1，简单\n2，还行（默认）\n3，普通\n4，进阶\n5，硬核\n6，帮助\n7，打字小精灵决斗\n7，退出\n请输入你的选択：[ ]\n";
+        gotoxy(17, 9);
         cin >> oprt;
         clrscr();
         this_thread::sleep_for(chrono::seconds(1));
