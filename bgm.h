@@ -1,23 +1,23 @@
 #include <iostream>
 #include <windows.h>
 #include <mmsystem.h>
+#include "encoding-convert.h"
 #pragma comment(lib, "winmm.lib")
 using namespace std;
 
-
-bool PlayMusic(const wchar_t* filePath, bool loop = false) {
-    wchar_t command[256];
+bool PlayMusic(const char* filePath, bool loop = false) {
+    char command[256];
     
     // 打开音乐文件
-    swprintf_s(command, L"open \"%s\" type mpegvideo alias bgm", filePath);
-    if (mciSendStringW(command, NULL, 0, NULL) != 0) {
+    sprintf_s(command, "open \"%s\" type mpegvideo alias bgm", filePath);
+    if (mciSendString(GBKToWide(command).c_str(), NULL, 0, NULL) != 0) {
         cerr << "无法打开音乐文件!" << std::endl;
         return false;
     }
     
     // 播放音乐 (可选循环)
-    swprintf_s(command, L"play bgm %s", loop ? L" repeat" : L"");
-    if (mciSendStringW(command, NULL, 0, NULL) != 0) {
+    sprintf_s(command, "play bgm %s", loop ? " repeat" : "");
+	if (mciSendString(GBKToWide(command).c_str(), NULL, 0, NULL) != 0) {
         cerr << "无法播放音乐!" << std::endl;
         return false;
     }

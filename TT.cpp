@@ -12,7 +12,6 @@
 #include <thread>
 #include <string>
 #include <conio.h>
-#include "bgm.h"
 #undef max
 using namespace std;
 
@@ -202,9 +201,14 @@ int main()
     size_t oprt = 0;
     char kbdInput = 'A';
 	string _ = "";
+	if (CP_ACP != 936){
+		cout << "Due to coding differences, \"TT(China only)\" cannot provide services for you. You can switch to the international version. Of course, if you don't mind the trouble and can understand Chinese, you can install a Chinese version of Windows to experience \"TT(China only)\" (of course, this is a bad idea for many people)" << endl;
+		cout << "We deeply apologize for any inconvenience caused to you." << endl;
+		cout << "          --\"TT(China only)\" Development Team" << endl;
+	}
     while (true) {
         cout << "打字测试V1.0 BY DEEPSLEEP-V3（包含21字，36字....）" << endl;
-        cout << "1，简单\n2，还行（默认）\n3，普通\n4，进阶\n5，硬核\n6，帮助\n7，打字小精灵决斗\n7，退出\n请输入你的选択：[ ]\n";
+        cout << "1，简单\n2，还行（默认）\n3，普通\n4，进阶\n5，硬核\n6，帮助\n7，退出\n请输入你的选択：[ ]\n";
         gotoxy(17, 9);
         cin >> oprt;
         clrscr();
@@ -262,7 +266,7 @@ int main()
 				continue;
 			}
             break;
-        case 7:
+		case 7:
             return 0;
         default:
             cout << "你的选択无效，倒计时后，将执行默认选项（2，还行）" << endl;
