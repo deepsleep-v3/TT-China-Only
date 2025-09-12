@@ -1,5 +1,5 @@
 # TT
-<p style="font-size: 30pt; align: center">TT现已同步Gitee!
+<p style="font-size: 30pt; align: center">TT现已同步Gitee!</p>
 [![DEEPSLEEP-V3/TT](https://gitee.com/deepsleep-v3/tt/widgets/widget_card.svg?colors=393222,cdebc1,f6ffe5,abd9a1,223826,41a37e)](https://gitee.com/deepsleep-v3/tt)
 
 
