@@ -22,19 +22,4 @@
     <PackageReference Include="Spectre.Console" Version="0.54.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="System.Windows.Forms">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\10.0.0\ref\net10.0\System.Windows.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms.Design">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\10.0.0\ref\net10.0\System.Windows.Forms.Design.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms.Design.Editors">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\10.0.0\ref\net10.0\System.Windows.Forms.Design.Editors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms.Primitives">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\10.0.0\ref\net10.0\System.Windows.Forms.Primitives.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
