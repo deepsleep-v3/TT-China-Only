@@ -1,3 +1,9 @@
 <Solution>
-  <Project Path="TT/TT.csproj" />
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="TT/TT.csproj">
+    <BuildType Solution="Debug|x64" Project="Debug" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
 </Solution>

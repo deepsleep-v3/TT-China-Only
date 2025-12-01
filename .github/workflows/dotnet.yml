@@ -25,29 +25,28 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish Windows application
-        run: dotnet publish ${{ env.PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output publish --runtime win-x64 --self-contained true -p:PublishSingleFile=false -p:IncludeNativeLibrariesForSelfExtract=true
+      run: |
+        dotnet publish ${{ env.PROJECT_PATH }} `
+        --configuration Release `
+        --output publish `
+        --runtime win-x64 `
+        --self-contained true `
+        -p:PublishSingleFile=false
     - name: Create ZIP package
       run: Compress-Archive -Path publish/* -DestinationPath "TT ${{ github.ref_name }} Windows x64.zip" -Force
     - name: Create Release with Ordered Languages
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: 版本發布 ${{ github.ref_name }}
-          body: |
-            # 版本發布 ${{ github.ref_name }}
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
+        body: |
             
-            ## 繁體中文 (zh-TW)
+          ## 繁體中文 (zh-TW)
             
-            ### 新版本功能
-            - 最新功能更新和性能優化
-            - 錯誤修復和穩定性提升
-            - 使用者體驗改進
-            
-            ### 系統需求
-            - **作業系統**: Windows 10/11 或 Windows Server 2016+
-            - **架構**: 64 位元 (x64)
-            - **記憶體**: 最少 4GB RAM
-            - **儲存空間**: 至少 200MB 可用空間
+          ### 系統需求
+          - **作業系統**: Windows 10/11 或 Windows Server 2016+
+          - **架構**: 64 位元 (x64)
+          - **儲存空間**: 至少 78MB 可用空間
             
             ### 安裝說明
             1. 下載 ZIP 壓縮檔
@@ -64,16 +63,11 @@ jobs:
             
             ## 香港繁體 (yue-Hant-HK)
             
-            ### 新版本功能
-            - 最新功能更新同性能優化
-            - 錯誤修復同穩定性提升
-            - 用戶體驗改進
             
             ### 系統要求
             - **操作系統**: Windows 10/11 或 Windows Server 2016+
             - **架構**: 64 位元 (x64)
-            - **記憶體**: 最少 4GB RAM
-            - **儲存空間**: 至少 200MB 可用空間
+            - **儲存空間**: 至少 78MB 可用空間
             
             ### 安裝指引
             1. 下載 ZIP 壓縮檔
@@ -89,17 +83,11 @@ jobs:
             ---
             
             ## English
-            
-            ### What's New
-            - Latest feature updates and performance optimization
-            - Bug fixes and stability improvements
-            - Enhanced user experience
-            
+              
             ### System Requirements
             - **OS**: Windows 10/11 or Windows Server 2016+
             - **Architecture**: 64-bit (x64)
-            - **Memory**: Minimum 4GB RAM
-            - **Storage**: At least 200MB free space
+            - **Storage**: At least 78MB free space
             
             ### Installation Guide
             1. Download the ZIP archive
