@@ -25,17 +25,9 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish Windows application
-        run: |
-          dotnet publish ${{ env.PROJECT_PATH }} `
-            --configuration ${{ env.CONFIGURATION }} `
-            --output publish `
-            --runtime win-x64 `
-            --self-contained true `
-            -p:PublishSingleFile=false `
-            -p:IncludeNativeLibrariesForSelfExtract=true
+        run: dotnet publish ${{ env.PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output publish --runtime win-x64 --self-contained true -p:PublishSingleFile=false -p:IncludeNativeLibrariesForSelfExtract=true
     - name: Create ZIP package
-      run: |
-        Compress-Archive -Path publish/* -DestinationPath "TT ${{ github.ref_name }} Windows x64.zip" -Force
+      run: Compress-Archive -Path publish/* -DestinationPath "TT ${{ github.ref_name }} Windows x64.zip" -Force
     - name: Create Release with Ordered Languages
         uses: softprops/action-gh-release@v1
         with:
