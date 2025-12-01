@@ -5,9 +5,7 @@ name: .NET
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags: ["v*"]
 
 jobs:
   build:
@@ -26,8 +24,103 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: GitHub Releases
-      # You may pin to the exact commit or the version.
-      # uses: fnkr/github-action-ghr@96b1448dc6162f370067e1de51e856e733a76b4f
-      uses: fnkr/github-action-ghr@v1.3
+    - name: Publish Windows application
+        run: |
+          dotnet publish ${{ env.PROJECT_PATH }} `
+            --configuration ${{ env.CONFIGURATION }} `
+            --output publish `
+            --runtime win-x64 `
+            --self-contained true `
+            -p:PublishSingleFile=false `
+            -p:IncludeNativeLibrariesForSelfExtract=true
+    - name: Create ZIP package
+      run: |
+        Compress-Archive -Path publish/* -DestinationPath "TT ${{ github.ref_name }} Windows x64.zip" -Force
+    - name: Create Release with Ordered Languages
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: 版本發布 ${{ github.ref_name }}
+          body: |
+            # 版本發布 ${{ github.ref_name }}
+            
+            ## 繁體中文 (zh-TW)
+            
+            ### 新版本功能
+            - 最新功能更新和性能優化
+            - 錯誤修復和穩定性提升
+            - 使用者體驗改進
+            
+            ### 系統需求
+            - **作業系統**: Windows 10/11 或 Windows Server 2016+
+            - **架構**: 64 位元 (x64)
+            - **記憶體**: 最少 4GB RAM
+            - **儲存空間**: 至少 200MB 可用空間
+            
+            ### 安裝說明
+            1. 下載 ZIP 壓縮檔
+            2. 解壓縮到您喜歡的資料夾
+            3. 執行應用程式主檔案
+            4. 開始使用應用程式
+            
+            ### 注意事項
+            - 此為自包含版本，無需安裝 .NET 運行時
+            - 建議關閉防毒軟體暫時性排除掃描
+            - 如有問題請聯繫技術支援
+            
+            ---
+            
+            ## 香港繁體 (yue-Hant-HK)
+            
+            ### 新版本功能
+            - 最新功能更新同性能優化
+            - 錯誤修復同穩定性提升
+            - 用戶體驗改進
+            
+            ### 系統要求
+            - **操作系統**: Windows 10/11 或 Windows Server 2016+
+            - **架構**: 64 位元 (x64)
+            - **記憶體**: 最少 4GB RAM
+            - **儲存空間**: 至少 200MB 可用空間
+            
+            ### 安裝指引
+            1. 下載 ZIP 壓縮檔
+            2. 解壓縮到你想放嘅文件夾
+            3. 執行應用程式主檔案
+            4. 開始使用應用程式
+            
+            ### 注意事項
+            - 呢個係自包含版本，唔需要安裝 .NET 運行時
+            - 建議暫時關閉防毒軟體進行掃描排除
+            - 如果有問題請聯繫技術支援
+            
+            ---
+            
+            ## English
+            
+            ### What's New
+            - Latest feature updates and performance optimization
+            - Bug fixes and stability improvements
+            - Enhanced user experience
+            
+            ### System Requirements
+            - **OS**: Windows 10/11 or Windows Server 2016+
+            - **Architecture**: 64-bit (x64)
+            - **Memory**: Minimum 4GB RAM
+            - **Storage**: At least 200MB free space
+            
+            ### Installation Guide
+            1. Download the ZIP archive
+            2. Extract to your preferred folder
+            3. Run the main application executable
+            4. Start using the application
+            
+            ### Important Notes
+            - This is a self-contained version, no .NET runtime required
+            - Temporarily disable antivirus for installation if needed
+            - Contact technical support if you encounter any issues
+          draft: false
+          files: "publish/TT ${{ github.ref_name }} Windows x64.zip"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
