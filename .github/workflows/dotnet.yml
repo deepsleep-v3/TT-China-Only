@@ -35,7 +35,7 @@ jobs:
     - name: Create ZIP package
       run: Compress-Archive -Path publish/* -DestinationPath "TT ${{ github.ref_name }} Windows x64.zip" -Force
     - name: Create Release with Ordered Languages
-      uses: softprops/action-gh-release@v5
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ github.ref_name }}
         name: Release ${{ github.ref_name }}
