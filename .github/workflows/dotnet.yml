@@ -98,5 +98,5 @@ jobs:
           + Temporarily disable antivirus for installation if needed
           + Contact technical support if you encounter any issues
         draft: false
-        files: "publish/TT ${{ github.ref_name }} Windows x64.zip"
+        files: "TT ${{ github.ref_name }} Windows x64.zip"
 
